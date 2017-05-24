@@ -1,36 +1,13 @@
-// Import the Node.js Postgres Driver
+// Connect to the startrek Database on a node in our CockroachDB cluster
 var pg = require('pg');
+var config = { user: 'root', database: 'startrek', port: 26257 };
+var db = new pg.Pool(config);
 
-// This function connects to a random cockroach database in our cluster.
-function connect(callback) {
-  // This is a list of ports in our CockroachDB Cluster
-  var ports = [26257, 26258, 26259];
+// Log when we connect to the CockroachDB node
+db.on('connect', function(client) { console.log("Connected to CockroachDB."); });
 
-  // Select a Random Port from our CockroachDB Cluster
-  var randomPort = ports[Math.floor(Math.random() * ports.length)];
+// Log any errors we encounter
+db.on('error', function(err) { console.error("Error connecting to CockroachDB."); });
 
-  // Create a configuration object that uses the random port
-  var config = {
-    user: 'root',
-    host: 'localhost',
-    database: 'startrek',
-    port: randomPort
-  };
-
-  // Connect to the database with the above configuration
-  pg.connect(config, function(err, client, done) {
-    if (err) {
-      // If there was an error, log it, close the connection, and retry.
-      console.error('Could not connect to Cockroachdb (' + randomPort + '): ', err);
-      done();
-      return connect(callback);
-    }
-
-    // Success! Log it and pass the client & callback to the calling function.
-    console.log('Connected to cockroachdb (Port #' + randomPort + ')');
-    callback(client, done);
-  });
-};
-
-// Export our connect function so it can be used in other files.
-module.exports.connect = connect;
+// Export the database connection so anyone can use it
+module.exports = db;
