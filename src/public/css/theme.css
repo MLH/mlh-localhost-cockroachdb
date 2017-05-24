@@ -1,0 +1,21 @@
+body {
+  background: black;
+  color: white;
+  text-align: center;
+}
+
+pre {
+  display: inline-block;
+  margin: 0 auto;
+  width: 625px;
+  white-space: pre-wrap;
+}
+
+.art {
+  text-align: left;
+}
+
+#quote {
+  padding: 0 20px;
+  width: 500px;
+}

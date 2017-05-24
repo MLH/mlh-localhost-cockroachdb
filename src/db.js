@@ -1,6 +1,7 @@
 // Import the Node.js Postgres Driver
 var pg = require('pg');
 
+// This function connects to a random cockroach database in our cluster.
 function connect(callback) {
   // This is a list of ports in our CockroachDB Cluster
   var ports = [26257, 26258, 26259];
@@ -26,7 +27,7 @@ function connect(callback) {
     }
 
     // Success! Log it and pass the client & callback to the calling function.
-    console.log('Connected to cockroachdb (' + randomPort + ')');
+    console.log('Connected to cockroachdb (Port #' + randomPort + ')');
     callback(client, done);
   });
 };
