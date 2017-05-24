@@ -1,11 +1,11 @@
 # MLH Localhost: Building Scalable Apps w/ CockroachDB
 
 This repositiory contains the sample code from the [MLH Localhost: Hacking
-with CockroachDB][#] workshop.
+with CockroachDB](#) workshop.
 
 ## Sample Code / Downloads
 
- - Star Trek App - [Demo][#] / [Source][2] / [Download][#]
+ - Star Trek App - [Demo](#) / [Source][1] / [Download](#)
 
 ## License
 
