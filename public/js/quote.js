@@ -13,6 +13,9 @@ $(document).ready(function() {
     }
   }
 
+  // Run the function once on page load
+  $.get('/quote').done(updateQuote)
+
   // Run the following function every 5 seconds
   setInterval(function() {
     // Fetch a new Quote and pass it to updateQuote

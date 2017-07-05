@@ -5,7 +5,7 @@ with CockroachDB][3] workshop.
 
 ## Sample Code / Downloads
 
- - Star Trek App - [Demo](#) / [Source][1] / [Download][2]
+ - Star Trek App - [Demo][4] / [Source][1] / [Download][2]
 
 ## License
 
@@ -36,3 +36,4 @@ SOFTWARE
 [1]: https://github.com/MLH/mlh-localhost-cockroachdb
 [2]: https://github.com/MLH/mlh-localhost-cockroachdb/archive/master.zip
 [3]: https://localhost.mlh.io/activities/intro-to-cockroachdb/
+[4]: http://mlhlocal.host/cockroachdb-demo
