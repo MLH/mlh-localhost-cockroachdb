@@ -1,6 +1,6 @@
 // Connect to the startrek Database on a node in our CockroachDB cluster
 var pg = require('pg');
-var config = { user: 'root', database: 'startrek', port: 26257 };
+var config = { user: 'root', database: 'startrek', port: 26257 }; //26257
 var db = new pg.Pool(config);
 
 // Log when we connect to the CockroachDB node
