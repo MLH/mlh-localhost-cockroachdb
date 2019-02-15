@@ -1,39 +1,64 @@
-# MLH Localhost: Building Scalable Apps w/ CockroachDB
+Startrek Quotes with CockroachDB
+================================
 
-This repositiory contains the sample code from the [MLH Localhost: Hacking
-with CockroachDB][3] workshop.
+Quotes are queried from CockroachDB and displayed every few seconds.  
+![preview](https://i.imgur.com/TiGjKH8.png)
 
-## Sample Code / Downloads
+Project on Glitch
+=================
 
- - Star Trek App - [Demo][4] / [Source][1] / [Download][2]
+Project can be found on Glitch at [https://checker-aries.glitch.me/](https://checker-aries.glitch.me)
 
-## License
+Troubleshooting
+===============
 
-Unless otherwise stated, the code in this repo is released under the MIT
-License.
+**Note:** if you open a Glitch console and `cockroach` is installed, the `cockroach` command will still not be found until you run `alias cockroach="~/.data/cockroach"`
+
+### Troubleshooting `BRB! Connecting to CockroachDB`
+
+This happens occassionally when the project has been running for a while. It may go to sleep. Simply reload the page and wait a few minutes while the project wakes up and restarts the DB process.
+
+If the app is really unresponsive, you may also go into the Glitch Console and type `sh cockroach.sh` to run the cockroachDB process manually. Hit `enter` to execute the DB process. You should see a bunch of output on the Glitch console.
+
+### App is still not responding and `EADDRINUSE :::3000` appears in the Glitch Log
+
+You have no choice but to kill the server.js process in the Glitch Console.
+![error](https://i.imgur.com/nzQsauv.png)
+
+* Go to the Glitch Console
+* Type `ps -ax` to see a list of all running processes.
+* Find the process `node server.js` and note the PID.
+* Finally, kill that process by running `kill [PID]`
+
+![kill](https://i.imgur.com/0u8U6qS.png)
+  
+Don't worry about restarting the node server.js as Glitch will do this automatically. You may return to your project on Glitch IDE and check the log to ensure you have no issues.
+
+### Error: `bash: cockroach: command not found`
+
+If you attempt to enter one of the commands beginning with `cockroach` and get the error above, enter this in your terminal: 
+
+`alias cockroach="~/.data/cockroach"` then 
+
+`cockroach version`. If you see this: 
 
 ```
-Copyright (c) 2017 Major League Hacking, Inc.
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE
+Build Tag:    v2.0.3
+Build Time:   2018/06/18 16:11:33
+Distribution: CCL
+Platform:     linux amd64 (x86_64-unknown-linux-gnu)
+Go Version:   go1.10
+C Compiler:   gcc 6.3.0
+Build SHA-1:  91715a9a95edbe716912173204fa4c0fc6724457
+Build Type:   release
 ```
-[1]: https://github.com/MLH/mlh-localhost-cockroachdb
-[2]: https://github.com/MLH/mlh-localhost-cockroachdb/archive/master.zip
-[3]: https://localhost.mlh.io/activities/intro-to-cockroachdb/
-[4]: http://mlhlocal.host/cockroachdb-demo
+
+you have fixed the error. 
+
+### See CockroachDB information instead of the app
+
+If someone sees information about `cockroachdb` instead of the quotes interface, they probably started the database incorrectly somehow. Quit the database using `cockroach quit --insecure --port=26257` (or whatever port number is required) and start it again.
+
+### Running out of space
+
+This only occured once during testing, but sometimes CockroachDB can run out of space on Glitch. In this case, remove the files `cockroach-data`, `mlh-node1` and `mlh-node2`. Then restart and refill the databases.
