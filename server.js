@@ -34,4 +34,4 @@ var listener = app.listen(process.env.PORT, function () {
 });
 
 // launch the cockroach DB script
-//child_process.exec("sh run_cockroach.sh")
+child_process.exec("sh run_cockroach.sh")
